@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Магазин</title>
+  </head>
+  <body>
+    <a href="koshik.html"><button id="my-top-right-btn">Кошик</button></a>
+    <h1>Вітаю в нашому магазині</h1>
+    <p>Тут ви знайдете найкращі велосипеди!</p>
+
+    <div>
+      <div class="product">
+        <img
+          src="https://tse1.mm.bing.net/th/id/OIP.7xHfVBHOhEBaQFCvjA9WIAHaEc?pid=Api&P=0&h=180"
+        />
+        <p>Велосипед №1 — 5000 грн</p>
+        <button onclick="addToCart('Велосипед №1', 5000)">Купити</button>
+      </div>
+
+      <div class="product">
+        <img
+          src="https://tse2.mm.bing.net/th/id/OIP.nZpTJKOKonBGPdrdjcTUOwHaFQ?pid=Api&P=0&h=180"
+        />
+        <p>Велосипед №2 — 6500 грн</p>
+        <button onclick="addToCart('Велосипед №2', 6500)">Купити</button>
+      </div>
+    </div>
+
+    <script>
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({ name, price });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert("Товар додано в кошик!");
+      }
+    </script>
+  </body>
+</html>
