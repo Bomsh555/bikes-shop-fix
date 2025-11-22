@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="koshik.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кошик</title>
+  </head>
+  <body>
+    <h1>Ваші товари</h1>
+
+    <div id="cart"></div>
+
+    <button onclick="clearCart()">Очистити кошик</button>
+
+    <script>
+      function loadCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartDiv = document.getElementById("cart");
+        cartDiv.innerHTML = "";
+
+        if (cart.length === 0) {
+          cartDiv.innerHTML = "<p>Кошик порожній</p>";
+          return;
+        }
+
+        cart.forEach((item, index) => {
+          cartDiv.innerHTML += `
+                    <div class="item">
+                        <p>${item.name} — ${item.price} грн</p>
+                        <button onclick="removeItem(${index})">Видалити</button>
+                    </div>
+                `;
+        });
+      }
+
+      function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+      }
+
+      function clearCart() {
+        localStorage.removeItem("cart");
+        loadCart();
+      }
+
+      loadCart();
+    </script>
+  </body>
+</html>
